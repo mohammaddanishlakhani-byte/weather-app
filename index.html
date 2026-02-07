@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌤️</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-cloud-sun"></i>
+                <h1>Weather Forecast</h1>
+            </div>
+            <p class="subtitle">Real-time weather updates for any location</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Search Section -->
+            <section class="search-section">
+                <div class="search-container">
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="city-input" placeholder="Enter city name (e.g., London, Tokyo, New York)">
+                        <button id="search-btn" class="search-btn">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                        <button id="location-btn" class="location-btn" title="Get my location weather">
+                            <i class="fas fa-location-arrow"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="unit-toggle">
+                        <span class="unit-label">Temperature Unit:</span>
+                        <div class="toggle-switch">
+                            <button class="unit-btn active" data-unit="metric">°C</button>
+                            <button class="unit-btn" data-unit="imperial">°F</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="error-message" class="error-message hidden">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span id="error-text">City not found. Please try again.</span>
+                </div>
+            </section>
+
+            <!-- Current Weather Card -->
+            <section class="weather-section">
+                <div class="weather-card">
+                    <div class="weather-header">
+                        <h2><i class="fas fa-map-marker-alt"></i> <span id="city-name">--</span></h2>
+                        <div class="weather-update-time">
+                            <i class="fas fa-clock"></i>
+                            <span id="update-time">--</span>
+                        </div>
+                    </div>
+                    
+                    <div class="weather-main">
+                        <div class="weather-icon-container">
+                            <i id="weather-icon" class="wi wi-day-sunny"></i>
+                        </div>
+                        <div class="weather-info">
+                            <div class="temperature">
+                                <span id="temperature">--</span>
+                                <span class="temp-unit">°C</span>
+                            </div>
+                            <div id="weather-description" class="weather-description">--</div>
+                        </div>
+                    </div>
+                    
+                    <div class="weather-details">
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-temperature-high"></i>
+                            </div>
+                            <div class="detail-info">
+                                <div class="detail-label">Feels Like</div>
+                                <div id="feels-like" class="detail-value">--°C</div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-tint"></i>
+                            </div>
+                            <div class="detail-info">
+                                <div class="detail-label">Humidity</div>
+                                <div id="humidity" class="detail-value">--%</div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <div class="detail-info">
+                                <div class="detail-label">Wind Speed</div>
+                                <div id="wind-speed" class="detail-value">-- m/s</div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-compress-alt"></i>
+                            </div>
+                            <div class="detail-info">
+                                <div class="detail-label">Pressure</div>
+                                <div id="pressure" class="detail-value">-- hPa</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Forecast Section -->
+                <div class="forecast-section">
+                    <h3><i class="fas fa-calendar-alt"></i> 5-Day Forecast</h3>
+                    <div class="forecast-container" id="forecast-container">
+                        <!-- Forecast items will be added here by JavaScript -->
+                        <div class="forecast-placeholder">
+                            <i class="fas fa-cloud-sun"></i>
+                            <p>Enter a city to see the 5-day forecast</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>Weather App <i class="fas fa-heart"></i> Powered by OpenWeatherMap</p>
+                <p class="api-status">
+                    <i class="fas fa-satellite-dish"></i>
+                    <span id="api-status-text">API Connected</span>
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Fetching weather data...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
